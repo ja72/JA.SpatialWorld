@@ -250,6 +250,59 @@ namespace JA.Mathematics
         }
         #endregion
 
+        public static string ToMatrixString(this double[] vector, string formatting = "g4", int columnWidth = 12)
+        {
+            int na = vector.Length;
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < na; i++)
+            {
+                sb.Append("|");
+                sb.Append(" ");
+                if (columnWidth > 0)
+                {
+                    sb.Append(vector[i].ToString(formatting).PadLeft(columnWidth));
+                }
+                else if (columnWidth < 0)
+                {
+                    sb.Append(vector[i].ToString(formatting).PadRight(columnWidth));
+                }
+                else
+                {
+                    throw new ArgumentOutOfRangeException(nameof(columnWidth), "Must be non-negative");
+                }
+                sb.AppendLine(" |");
+            }
+            return sb.ToString();
+        }
+        public static string ToMatrixString(this double[][] matrix, string formatting = "g4", int columnWidth = 12)
+        {
+            int na = matrix.Length, ma = na>0 ?  matrix[0].Length : 0;
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < na; i++)
+            {
+                sb.Append("|");
+                double[] row = matrix[i];
+                for (int j = 0; j < ma; j++)
+                {
+                    sb.Append(" ");
+                    if (columnWidth > 0)
+                    {
+                        sb.Append(row[j].ToString(formatting).PadLeft(columnWidth));
+                    }
+                    else if (columnWidth < 0)
+                    {
+                        sb.Append(row[j].ToString(formatting).PadRight(columnWidth));
+                    }
+                    else
+                    {
+                        throw new ArgumentOutOfRangeException(nameof(columnWidth), "Must be non-negative");
+                    }
+                }
+                sb.AppendLine(" |");
+            }
+            return sb.ToString();
+        }
+
         #endregion
     }
 

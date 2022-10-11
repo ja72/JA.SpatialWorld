@@ -5,7 +5,7 @@ namespace JA.Mathematics
 {
     public static class Factory
     {
-
+        public const double DEG = Math.PI / 180;
         public const double TrigonometricPrecision = 1.0 / 134217728;
 
         #region Vectors
